@@ -1,9 +1,7 @@
 #Clone Subnautica's Compatdata path for Nitrox to run in
-cp -r ~/home/deck/.local/share/Steam/steamapps/compatdata/264710 ~/home/deck/.local/share/Steam/steamapps/compatdata/NitroxLauncher || failed=1
+cp -r ~/home/deck/.local/share/Steam/steamapps/compatdata/264710 ~/home/deck/.local/share/Steam/steamapps/compatdata/NitroxLauncher
 
-if [[ $failed == 1 ]]; then
-  echo -e "\e[31mPlease install Subnautica in the deafult steam directory and run it at least once\e[0m" && exit 1
-fi
+
 
 export STEAM_COMPAT_DATA_PATH=~/home/deck/.local/share/Steam/steamapps/compatdata/NitroxLauncher
 export STEAM_COMPAT_CLIENT_INSTALL_PATH=~/home/deck/.local/share/Steam
@@ -13,7 +11,7 @@ launcherpath=~/home/deck/.local/share/Steam/steamapps/compatdata/264710/pfx/driv
 mkdir -p $launcherpath
 
 #Create the launcherpath.txt file so Subnautica can locate and load Nitrox
-echo $(dirname $(readlink -f $0)) > $launcherpath/launcherpath.txt
+$(dirname $(readlink -f $0)) > $launcherpath/launcherpath.txt
 
 #Create path.exe and put Subnautica's path into it (removes a step in the Nitrox Launcher)
 echo ~/home/deck/.local/share/Steam/steamapps/common/Subnautica > $(dirname $(readlink -f $0))/path.txt
